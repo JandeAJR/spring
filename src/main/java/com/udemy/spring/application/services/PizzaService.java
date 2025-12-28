@@ -19,9 +19,9 @@ import jakarta.persistence.EntityNotFoundException;
     Esta classe representa os serviços disponíveis para o cadastro da pizza.
 */
 
-@Service
+@Service // Indica que esta classe é um serviço do Spring.
 public class PizzaService {
-	@Autowired
+	@Autowired // Injeção de dependência do repositório de pizzas.
     private PizzaRepository pizzaRepository;
 
     public Pizza pizzaRegistration(Pizza pizza) {

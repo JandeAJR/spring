@@ -19,11 +19,11 @@ import com.udemy.spring.infrastructure.repositories.RequestRepository;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
-	@Autowired
+	@Autowired // Dependency Injection
     private CustomerRepository customerRepository;
-    @Autowired
+    @Autowired // Dependency Injection
     private PizzaRepository pizzaRepository;
-    @Autowired
+    @Autowired // Dependency Injection
     private RequestRepository requestRepository;
 
     public void run(String... args) throws Exception {

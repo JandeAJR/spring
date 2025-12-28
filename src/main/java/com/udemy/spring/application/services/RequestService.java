@@ -24,15 +24,15 @@ import jakarta.persistence.EntityNotFoundException;
     Esta classe representa os serviços disponíveis para o pedido.
 */
 
-@Service
+@Service // Indica que esta classe é um serviço do Spring.
 public class RequestService {
-	@Autowired
+	@Autowired // Injeção de dependência do repositório de pedidos.
     private RequestRepository requestRepository;
 
-    @Autowired
+    @Autowired // Injeção de dependência do serviço de pizzas.
     private PizzaService pizzaService;
 
-    @Autowired
+    @Autowired // Injeção de dependência do serviço de clientes.
     private CustomerService customerService;
 
     public Request requestRegistration(RequestDTO requestDTO) {

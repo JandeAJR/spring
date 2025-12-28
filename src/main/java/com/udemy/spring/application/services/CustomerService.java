@@ -19,9 +19,9 @@ import jakarta.persistence.EntityNotFoundException;
     Esta classe representa os serviços disponíveis para o cadastro do cliente.
 */
 
-@Service
+@Service // Indica que esta classe é um serviço do Spring.
 public class CustomerService {
-	@Autowired
+	@Autowired // Injeção de dependência do repositório de clientes.
     private CustomerRepository customerRepository;
 
     public Customer customerRegistration(Customer customer) {

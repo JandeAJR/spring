@@ -19,10 +19,10 @@ import com.udemy.spring.application.dtos.RequestDTO;
 import com.udemy.spring.application.services.RequestService;
 import com.udemy.spring.infrastructure.models.Request;
 
-@RestController
-@RequestMapping("/requests")
+@RestController // indicates that this class is a REST controller
+@RequestMapping("/requests") // base URL for this resource
 public class RequestResource {
-	@Autowired
+	@Autowired // Dependency Injection
     private RequestService requestService;
 
     @GetMapping //endpoint

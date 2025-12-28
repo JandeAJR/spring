@@ -18,10 +18,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.udemy.spring.application.services.CustomerService;
 import com.udemy.spring.infrastructure.models.Customer;
 
-@RestController
-@RequestMapping("/customers")
+@RestController // indicates that this class is a REST controller
+@RequestMapping("/customers") // base URL for this resource
 public class CustomerResource {
-	@Autowired
+	@Autowired // Dependency Injection
     private CustomerService customerService;
 
     @GetMapping //endpoint

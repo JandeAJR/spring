@@ -18,10 +18,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.udemy.spring.application.services.PizzaService;
 import com.udemy.spring.infrastructure.models.Pizza;
 
-@RestController
-@RequestMapping("/pizzas")
+@RestController // indicates that this class is a REST controller
+@RequestMapping("/pizzas") // base URL for this resource
 public class PizzaResource {
-	@Autowired
+	@Autowired // Dependency Injection
     private PizzaService pizzaService;
 
     @GetMapping //endpoint
