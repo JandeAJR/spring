@@ -46,6 +46,11 @@ public class PizzaService {
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
+        
+		return null;
     }
 
     private void updateEntity(Pizza entity, Pizza pizza) {
@@ -63,5 +68,8 @@ public class PizzaService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
     }
 }

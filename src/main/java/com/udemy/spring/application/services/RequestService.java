@@ -60,6 +60,11 @@ public class RequestService {
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
+        
+		return null;
     }
 
     private void updateEntity(Request entity, RequestDTO request) {
@@ -76,5 +81,8 @@ public class RequestService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
     }
 }

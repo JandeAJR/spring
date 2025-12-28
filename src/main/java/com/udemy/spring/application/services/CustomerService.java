@@ -46,6 +46,11 @@ public class CustomerService {
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
+        
+		return null;
     }
 
     private void updateEntity(Customer entity, Customer customer) {
@@ -63,5 +68,8 @@ public class CustomerService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
     }
 }
