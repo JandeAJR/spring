@@ -31,7 +31,6 @@
     </properties>
 
     <dependencies>
-
         <!-- 🌐 Web / MVC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,19 +63,15 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-
             <!-- 🚀 Plugin Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
