@@ -30,13 +30,13 @@ public class CustomerResource {
        return ResponseEntity.ok().body(customers);
     }
 
-    @GetMapping(value = "/{id}")//endpoint
+    @GetMapping(value = "/{id}") //endpoint
     public ResponseEntity<Customer> findById(@PathVariable String id) {
         Customer customer = customerService.findById(id);
         return ResponseEntity.ok().body(customer);
     }
 
-    @PostMapping//endpoint
+    @PostMapping //endpoint
     public ResponseEntity<Customer> insert(@RequestBody Customer customer) {
         customer = customerService.customerRegistration(customer);
         URI uri = ServletUriComponentsBuilder
@@ -46,13 +46,13 @@ public class CustomerResource {
         return ResponseEntity.created(uri).body(customer);
     }
 
-    @DeleteMapping(value = "/{id}")//endpoint
+    @DeleteMapping(value = "/{id}") //endpoint
     public ResponseEntity<Void> delete(@PathVariable String id) {
         customerService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}")//endpoint
+    @PutMapping(value = "/{id}") //endpoint
     public ResponseEntity<Customer> update(@PathVariable String id, @RequestBody Customer customer) {
         customer = customerService.update(id, customer);
         return ResponseEntity.ok().body(customer);

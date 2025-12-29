@@ -31,13 +31,13 @@ public class RequestResource {
         return ResponseEntity.ok().body(requests);
     }
 
-    @GetMapping(value = "/{id}")//endpoint
+    @GetMapping(value = "/{id}") //endpoint
     public ResponseEntity<Request> findById(@PathVariable Long id) {
         Request request = requestService.findById(id);
         return ResponseEntity.ok().body(request);
     }
 
-    @PostMapping//endpoint
+    @PostMapping //endpoint
     public ResponseEntity<Request> insert(@RequestBody RequestDTO requestDTO) {
         Request request = requestService.requestRegistration(requestDTO);
         URI uri = ServletUriComponentsBuilder
@@ -47,13 +47,13 @@ public class RequestResource {
         return ResponseEntity.created(uri).body(request);
     }
 
-    @DeleteMapping(value = "/{id}")//endpoint
+    @DeleteMapping(value = "/{id}") //endpoint
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         requestService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}")//endpoint
+    @PutMapping(value = "/{id}") //endpoint
     public ResponseEntity<Request> update(@PathVariable Long id, @RequestBody RequestDTO requestDTO) {
         Request request = requestService.update(id, requestDTO);
         return ResponseEntity.ok().body(request);
