@@ -13,6 +13,7 @@ public class RequestDTO {
     private Double price;
     private Long pizzaId;
     private String telephone;
+    private String cpf;
 
     public Integer getAmount() {
         return amount;
@@ -45,4 +46,12 @@ public class RequestDTO {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 }

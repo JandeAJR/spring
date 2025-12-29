@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.udemy.spring.infrastructure.models.pks.CustomerPk;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -31,9 +33,13 @@ import jakarta.persistence.Table;
 @Table(name = "tb_customer")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "telephone", length = 11)
-    private String telephone;
+	
+    //@Id
+    //@Column(name = "telephone", length = 11)
+    //private String telephone;
+    
+    @EmbeddedId // Usado para chave composta
+    private CustomerPk id;
 
     @Column(name = "name", length = 255)
     private String name;
@@ -42,23 +48,23 @@ public class Customer implements Serializable {
     private String address;
 
     @JsonIgnore // Evita o loop infinito na serialização JSON
-    @OneToMany(mappedBy = "customer")
-    private List<Request> requests = new ArrayList<>();
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY) // FetchType.LAZY  -> Lazy loading (default) -> Carregamento tardio
+    private List<Request> requests = new ArrayList<>();      //  FetchType.EAGER -> Eager loading -> Carregamento imediato
+                                                            // Para usar Lazy Loading, configurar spring.jpa.open-in-view=true
+    public Customer() {}                                   //  Para usar Eager Loading, configurar spring.jpa.open-in-view=false
 
-    public Customer() {}
-
-    public Customer(String telephone, String name, String address) {
-        this.telephone = telephone;
+    public Customer(CustomerPk id, String name, String address) {
+        this.id = id;
         this.name = name;
         this.address = address;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public CustomerPk getId() {
+        return id;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setId(CustomerPk id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -86,20 +92,21 @@ public class Customer implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(telephone, customer.telephone);
+        return Objects.equals(id, customer.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(telephone);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "telephone='" + telephone + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", requests=" + requests +
                 '}';
     }
 }

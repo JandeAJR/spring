@@ -16,6 +16,7 @@ import com.udemy.spring.application.services.exceptions.ResourceNotFoundExceptio
 import com.udemy.spring.infrastructure.models.Customer;
 import com.udemy.spring.infrastructure.models.Pizza;
 import com.udemy.spring.infrastructure.models.Request;
+import com.udemy.spring.infrastructure.models.pks.CustomerPk;
 import com.udemy.spring.infrastructure.repositories.RequestRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -37,9 +38,10 @@ public class RequestService {
 
     public Request requestRegistration(RequestDTO requestDTO) {
         Pizza pizza = pizzaService.findById(requestDTO.getPizzaId());
-        Customer customer = customerService.findById(requestDTO.getTelephone());
+        Customer customer = customerService.findById(new CustomerPk(requestDTO.getTelephone(), requestDTO.getCpf()));
         Request request = new Request(LocalDateTime.now(ZoneId.of("UTC")), requestDTO.getAmount(), requestDTO.getPrice(),
                                       pizza, customer);
+        
         return requestRepository.save(request);
     }
     public Request findById(Long id) {

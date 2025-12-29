@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.udemy.spring.application.services.exceptions.DatabaseException;
 import com.udemy.spring.application.services.exceptions.ResourceNotFoundException;
 import com.udemy.spring.infrastructure.models.Customer;
+import com.udemy.spring.infrastructure.models.pks.CustomerPk;
 import com.udemy.spring.infrastructure.repositories.CustomerRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -28,7 +29,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer findById(String id) {
+    public Customer findById(CustomerPk id) {
         Optional<Customer> optional = customerRepository.findById(id);
         return optional.orElseThrow(() -> new ResourceNotFoundException(id));
     }
@@ -37,7 +38,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer update(String id, Customer customer) {
+    public Customer update(CustomerPk id, Customer customer) {
         try {
             Customer entity = customerRepository.getReferenceById(id);
             updateEntity(entity, customer);
@@ -58,7 +59,7 @@ public class CustomerService {
         entity.setName(customer.getName());
     }
 
-    public void deleteById(String id) {
+    public void deleteById(CustomerPk id) {
         try {
             customerRepository.deleteById(id);
         }

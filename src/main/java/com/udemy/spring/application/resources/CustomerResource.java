@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.udemy.spring.application.services.CustomerService;
 import com.udemy.spring.infrastructure.models.Customer;
+import com.udemy.spring.infrastructure.models.pks.CustomerPk;
 
 @RestController // indicates that this class is a REST controller
 @RequestMapping("/customers") // base URL for this resource
@@ -30,9 +31,9 @@ public class CustomerResource {
        return ResponseEntity.ok().body(customers);
     }
 
-    @GetMapping(value = "/{id}") //endpoint
-    public ResponseEntity<Customer> findById(@PathVariable String id) {
-        Customer customer = customerService.findById(id);
+    @GetMapping(value = "/{telephone}/{cpf}") //endpoint
+    public ResponseEntity<Customer> findById(@PathVariable String telephone, @PathVariable String cpf) {
+        Customer customer = customerService.findById(new CustomerPk(telephone, cpf));
         return ResponseEntity.ok().body(customer);
     }
 
@@ -40,21 +41,21 @@ public class CustomerResource {
     public ResponseEntity<Customer> insert(@RequestBody Customer customer) {
         customer = customerService.customerRegistration(customer);
         URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(customer.getTelephone())
+                .fromCurrentRequest().path("/{telephone}/{cpf}")
+                .buildAndExpand(customer.getId().getTelephone(), customer.getId().getCpf())
                 .toUri();
         return ResponseEntity.created(uri).body(customer);
     }
 
-    @DeleteMapping(value = "/{id}") //endpoint
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        customerService.deleteById(id);
+    @DeleteMapping(value = "/{telephone}/{cpf}") //endpoint
+    public ResponseEntity<Void> delete(@PathVariable String telephone, @PathVariable String cpf) {
+        customerService.deleteById(new CustomerPk(telephone, cpf));
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}") //endpoint
-    public ResponseEntity<Customer> update(@PathVariable String id, @RequestBody Customer customer) {
-        customer = customerService.update(id, customer);
-        return ResponseEntity.ok().body(customer);
-    }
+    @PutMapping(value = "/{telephone}/{cpf}") //endpoint
+    public ResponseEntity<Customer> update(@PathVariable String telephone, @PathVariable String cpf, @RequestBody Customer customer) {
+		customer = customerService.update(new CustomerPk(telephone, cpf), customer);
+		return ResponseEntity.ok().body(customer);
+	}
 }

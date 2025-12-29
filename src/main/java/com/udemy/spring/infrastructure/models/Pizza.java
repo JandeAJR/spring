@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,10 +46,10 @@ public class Pizza implements Serializable {
     private Double price;
 
     @JsonIgnore // Evita o loop infinito na serialização JSON
-    @OneToMany(mappedBy = "pizzaId")
-    private List<Request> requests = new ArrayList<>();
-
-    public Pizza() {}
+    @OneToMany(mappedBy = "pizzaId", fetch = FetchType.LAZY) // FetchType.LAZY  -> Lazy loading (default) -> Carregamento tardio 
+    private List<Request> requests = new ArrayList<>();     //  FetchType.EAGER -> Eager loading -> Carregamento imediato
+                                                           // Para usar Lazy Loading, configurar spring.jpa.open-in-view=true
+    public Pizza() {}                                     //  Para usar Eager Loading, configurar spring.jpa.open-in-view=false
 
     public Pizza(String name, Double price) {
         this.name = name;

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import com.udemy.spring.infrastructure.models.Customer;
 import com.udemy.spring.infrastructure.models.Pizza;
 import com.udemy.spring.infrastructure.models.Request;
+import com.udemy.spring.infrastructure.models.pks.CustomerPk;
 import com.udemy.spring.infrastructure.repositories.CustomerRepository;
 import com.udemy.spring.infrastructure.repositories.PizzaRepository;
 import com.udemy.spring.infrastructure.repositories.RequestRepository;
@@ -32,7 +33,8 @@ public class TestConfig implements CommandLineRunner {
         Pizza pizza3 = new Pizza("Frango com Catupiry", 50.00);
         pizzaRepository.saveAll(Arrays.asList(pizza, pizza2, pizza3));
 
-        Customer customer = new Customer("11999999999", "Marcos", "Av. Paulista, 1578");
+        CustomerPk customerPk = new CustomerPk("11999999999", "123456789");
+        Customer customer = new Customer(customerPk, "Marcos", "Av. Paulista, 1578");
         customerRepository.save(customer);
 
         Request request = new Request(LocalDateTime.now(ZoneId.of("UTC")), 2, pizza.getPrice(), pizza, customer);

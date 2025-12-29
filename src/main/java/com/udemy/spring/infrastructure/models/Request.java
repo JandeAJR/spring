@@ -8,10 +8,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -52,10 +54,10 @@ public class Request implements Serializable {
     @JoinColumn(name = "pizzaId")
     private Pizza pizzaId;
 
-    @ManyToOne
-    @JoinColumn(name = "telephone")
-    private Customer customer;
-
+    @ManyToOne(fetch = FetchType.LAZY)                                            // FetchType.LAZY  -> Lazy loading (default) -> Carregamento tardio 
+    @JoinColumns({@JoinColumn(name = "telephone"), @JoinColumn(name = "cpf")})   //  FetchType.EAGER -> Eager loading -> Carregamento imediato
+    private Customer customer;                                                  // Para usar Lazy Loading, configurar spring.jpa.open-in-view=true
+                                                                               //  Para usar Eager Loading, configurar spring.jpa.open-in-view=false
     public Request() {}
 
     public Request(LocalDateTime date, Integer amount, Double price, Pizza pizzaId, Customer customer) {
