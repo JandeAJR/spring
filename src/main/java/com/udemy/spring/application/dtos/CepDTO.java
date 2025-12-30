@@ -5,7 +5,7 @@ import lombok.Data;
 @Data // Lombok annotation to generate getters, setters, toString, equals, and hashCode methods
 public class CepDTO {
 	String cep;
-	String Logradouro;
+	String logradouro;
 	String complemento;
 	String bairro;
 	String localidade;
