@@ -1,0 +1,76 @@
+package com.udemy.spring.application.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
+import com.udemy.spring.application.services.exceptions.DatabaseException;
+import com.udemy.spring.application.services.exceptions.ResourceNotFoundException;
+import com.udemy.spring.infrastructure.models.Customer;
+import com.udemy.spring.infrastructure.models.pks.CustomerPk;
+import com.udemy.spring.infrastructure.repositories.CustomerRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+
+/*
+    Esta classe representa os serviços disponíveis para o cadastro do cliente.
+*/
+
+@Service // Indica que esta classe é um serviço do Spring.
+public class CustomerService {
+	@Autowired // Injeção de dependência do repositório de clientes.
+    private CustomerRepository customerRepository;
+
+    public Customer customerRegistration(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public Customer findById(CustomerPk id) {
+        Optional<Customer> optional = customerRepository.findById(id);
+        return optional.orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
+    }
+
+    public Customer update(CustomerPk id, Customer customer) {
+        try {
+            Customer entity = customerRepository.getReferenceById(id);
+            updateEntity(entity, customer);
+            return customerRepository.save(entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
+        
+		return null;
+    }
+
+    private void updateEntity(Customer entity, Customer customer) {
+        entity.setAddress(customer.getAddress());
+        entity.setName(customer.getName());
+    }
+
+    public void deleteById(CustomerPk id) {
+        try {
+            customerRepository.deleteById(id);
+        }
+        catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
+			e.printStackTrace();
+		}
+    }
+}
