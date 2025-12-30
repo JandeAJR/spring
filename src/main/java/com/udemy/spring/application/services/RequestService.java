@@ -77,5 +77,8 @@ public class RequestService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+        catch (RuntimeException e) { // Captura outras exceções de tempo de execução não previstas (opcional).
+        	e.printStackTrace();
+        }
     }
 }
