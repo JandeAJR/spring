@@ -36,6 +36,10 @@ public class PizzaService {
     public List<Pizza> findAll() {
         return pizzaRepository.findAll();
     }
+    
+    public List<Pizza> findAllById(List<Long> id) {
+        return pizzaRepository.findAllById(id);
+    }
 
     public Pizza update(Long id, Pizza pizza) {
         try {

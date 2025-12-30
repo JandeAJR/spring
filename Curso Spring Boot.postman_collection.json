@@ -275,7 +275,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"amount\": 3,\r\n    \"price\": 100.00,\r\n    \"telephone\": \"11999999999\",\r\n    \"cpf\": \"123456789\",\r\n    \"pizzaId\": 2\r\n}",
+							"raw": "{\r\n    \"amount\": 3,\r\n    \"price\": 100.00,\r\n    \"telephone\": \"11999999999\",\r\n    \"cpf\": \"123456789\",\r\n    \"pizzasId\": [1, 3]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

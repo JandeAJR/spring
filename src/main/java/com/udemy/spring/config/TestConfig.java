@@ -28,7 +28,7 @@ public class TestConfig implements CommandLineRunner {
     private RequestRepository requestRepository;
 
     public void run(String... args) throws Exception {
-        Pizza pizza = new Pizza("Muzzarela", 30.50);
+    	Pizza pizza = new Pizza("Muzzarela", 30.50);
         Pizza pizza2 = new Pizza("Calabreza", 25.89);
         Pizza pizza3 = new Pizza("Frango com Catupiry", 50.00);
         pizzaRepository.saveAll(Arrays.asList(pizza, pizza2, pizza3));
@@ -37,7 +37,7 @@ public class TestConfig implements CommandLineRunner {
         Customer customer = new Customer(customerPk, "Marcos", "Av. Paulista, 1578");
         customerRepository.save(customer);
 
-        Request request = new Request(LocalDateTime.now(ZoneId.of("UTC")), 2, pizza.getPrice(), pizza, customer);
+        Request request = new Request(LocalDateTime.now(ZoneId.of("UTC")), customer, Arrays.asList(pizza, pizza2, pizza3), 125.00);
         requestRepository.save(request);
     }
 }

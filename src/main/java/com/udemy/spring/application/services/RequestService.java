@@ -37,13 +37,12 @@ public class RequestService {
     private CustomerService customerService;
 
     public Request requestRegistration(RequestDTO requestDTO) {
-        Pizza pizza = pizzaService.findById(requestDTO.getPizzaId());
-        Customer customer = customerService.findById(new CustomerPk(requestDTO.getTelephone(), requestDTO.getCpf()));
-        Request request = new Request(LocalDateTime.now(ZoneId.of("UTC")), requestDTO.getAmount(), requestDTO.getPrice(),
-                                      pizza, customer);
-        
+        List<Pizza> pizzas = pizzaService.findAllById(requestDTO.getPizzasId());
+        Customer customer = customerService.findById(new CustomerPk(requestDTO.getTelephone(),requestDTO.getCpf()));
+        Request request = new Request(LocalDateTime.now(ZoneId.of("UTC")), customer, pizzas, requestDTO.getPrice());
         return requestRepository.save(request);
     }
+
     public Request findById(Long id) {
         Optional<Request> optional = requestRepository.findById(id);
         return optional.orElseThrow(() -> new ResourceNotFoundException(id));
@@ -62,15 +61,10 @@ public class RequestService {
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
-        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
-			e.printStackTrace();
-		}
-        
-		return null;
     }
 
     private void updateEntity(Request entity, RequestDTO request) {
-        entity.setAmount(request.getAmount());
+        entity.setPrice(request.getPrice());
     }
 
     public void deleteById(Long id) {
@@ -83,8 +77,5 @@ public class RequestService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
-        catch (RuntimeException e) { // Captura outras exceções de tempo de execução.
-			e.printStackTrace();
-		}
     }
 }
