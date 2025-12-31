@@ -1,0 +1,24 @@
+{
+	"properties": [
+		{
+			"name": "spring.server.port",
+			"type": "java.lang.String",
+			"description": "A description for 'spring.server.port'"
+		},
+		{
+			"name": "spring.server.servlet.context-path",
+			"type": "java.lang.String",
+			"description": "A description for 'spring.server.servlet.context-path'"
+		},
+		{
+			"name": "spring.springdoc.swagger-ui.path",
+			"type": "java.lang.String",
+			"description": "A description for 'spring.springdoc.swagger-ui.path'"
+		},
+		{
+			"name": "spring.springdoc.api-docs.path",
+			"type": "java.lang.String",
+			"description": "A description for 'spring.springdoc.api-docs.path'"
+		}
+	]
+}
