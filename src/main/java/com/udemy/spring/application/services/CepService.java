@@ -7,7 +7,7 @@ import com.udemy.spring.application.dtos.CepDTO;
 
 @Service
 public class CepService {
-	private final ViaCepClient viaCepClient;
+	private final ViaCepClient viaCepClient; // Client Injection
 	
 	// Constructor Injection
 	public CepService(ViaCepClient viaCepClient) {

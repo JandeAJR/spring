@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.servers.Server;
 
+// Swagger/OpenAPI url: http://localhost:8080/api/spring/swagger
+
 @EnableFeignClients // Habilita o uso do OpenFeign para comunicação entre serviços (apis externas)
 @SpringBootApplication
 @OpenAPIDefinition(
