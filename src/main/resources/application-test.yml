@@ -22,3 +22,6 @@ springdoc:
     path: /swagger
   api-docs:
     path: /v3/api-docs
+
+viacep:
+  url: https://viacep.com.br/ws
