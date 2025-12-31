@@ -9,5 +9,5 @@ import com.udemy.spring.application.dtos.CepDTO;
 @FeignClient(url = "https://viacep.com.br/ws/", name = "cep")
 public interface HttpClient {
 	@GetMapping("{cep}/json")
-	CepDTO buscarCep(@PathVariable("cep") String cep);
+	CepDTO buscarCep(@PathVariable String cep);
 }

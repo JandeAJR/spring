@@ -65,7 +65,6 @@ public class Request implements Serializable {
     public Request() {}
 
     public Request(LocalDateTime date, Customer customer, List<Pizza> pizzas, Double price) {
-        this.id = id;
         this.date = date;
         this.customer = customer;
         this.pizzas = pizzas;
