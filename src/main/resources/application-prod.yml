@@ -26,4 +26,4 @@ jwt:
   expiration: ${JWT_EXPIRATION}
 
 viacep:
-  url: https://viacep.com.br/ws
+  url: ${VIACEP_URL}
