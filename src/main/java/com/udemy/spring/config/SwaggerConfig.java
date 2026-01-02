@@ -3,9 +3,11 @@ package com.udemy.spring.config;
 import org.springframework.context.annotation.Configuration;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 /**
@@ -13,7 +15,9 @@ import io.swagger.v3.oas.annotations.servers.Server;
  * Define informações como título, versão, descrição, contato e servidores.
  * Essas informações ajudam desenvolvedores a entenderem e utilizarem a API de forma eficaz.
  * A documentação gerada pode ser acessada via Swagger UI.
- * Swagger/OpenAPI url: http://localhost:8080/api/spring/swagger
+ * Swagger/OpenAPI url:
+ * Api docs:   http://localhost:8080/api/spring/v3/api-docs
+ * Swagger UI: http://localhost:8080/api/spring/swagger-ui/index.html
  */
 
 @Configuration
@@ -46,5 +50,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
             description = "Produção"
         )
     }
+)
+@SecurityScheme(
+    name = "bearerAuth",
+    type = SecuritySchemeType.HTTP,
+    scheme = "bearer",
+    bearerFormat = "JWT"
 )
 public class SwaggerConfig {}

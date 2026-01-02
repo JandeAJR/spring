@@ -83,6 +83,8 @@
             <optional>true</optional>
         </dependency>
         
+        <!-- Demais dependencias -->
+        
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -94,7 +96,14 @@
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
-		</dependency>		
+		</dependency>	
+		
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-api</artifactId>
+		    <version>0.13.0</version>
+		</dependency>	
     </dependencies>
 
     <build>
