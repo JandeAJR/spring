@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -20,12 +19,17 @@ import com.udemy.spring.infrastructure.repositories.RequestRepository;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
-	@Autowired // Dependency Injection
-    private CustomerRepository customerRepository;
-    @Autowired // Dependency Injection
-    private PizzaRepository pizzaRepository;
-    @Autowired // Dependency Injection
-    private RequestRepository requestRepository;
+	private final CustomerRepository customerRepository;
+	private final PizzaRepository pizzaRepository;  
+	private final RequestRepository requestRepository;
+    
+	// Constructor Injection
+	public TestConfig(CustomerRepository customerRepository, PizzaRepository pizzaRepository,
+			RequestRepository requestRepository) {
+		this.customerRepository = customerRepository;
+		this.pizzaRepository = pizzaRepository;
+		this.requestRepository = requestRepository;
+	}
 
     public void run(String... args) throws Exception {
     	Pizza pizza = new Pizza("Muzzarela", 30.50);
