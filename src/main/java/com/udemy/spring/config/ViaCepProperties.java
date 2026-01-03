@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotBlank;
 @Component
 @ConfigurationProperties(prefix = "viacep")
 public class ViaCepProperties {
-
 	@NotBlank
     private String url;
 
