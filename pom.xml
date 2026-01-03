@@ -114,5 +114,19 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        
+        <!-- 
+			Permite usar propriedades do Maven (${project.*}) nos arquivos de configuração
+		    Habilita filtering nos recursos para permitir a substituição de placeholders
+		    do Maven (ex: ${project.version}, ${project.name}) dentro dos arquivos
+		    application.yml / application.properties durante o build.
+		    Essencial para expor informações de versão e metadados da aplicação em runtime.
+		-->
+        <resources>
+		    <resource>
+			    <directory>src/main/resources</directory>
+			    <filtering>true</filtering>
+		    </resource>
+	  </resources>
     </build>
 </project>

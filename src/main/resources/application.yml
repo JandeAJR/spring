@@ -1,7 +1,11 @@
 spring:
   application:
-    name: spring
+    name: "@project.artifactId@"
   profiles:
     active: test
   jpa:
     open-in-view: true
+
+project:
+  name: "@project.artifactId@"
+  version: "@project.version@"

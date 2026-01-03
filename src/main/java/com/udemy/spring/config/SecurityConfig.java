@@ -40,7 +40,7 @@ public class SecurityConfig {
 
 	        // 🛡️ Regras de autorização
 	        .authorizeHttpRequests(auth -> auth
-	            // Swagger LIBERADO
+	            // Swagger liberado
 	            .requestMatchers(
 	                "/swagger-ui.html",
 	                "/swagger-ui/**",
@@ -48,10 +48,11 @@ public class SecurityConfig {
 	                "/api/spring/v3/api-docs/**"
 	            ).permitAll()
 
-	            // Endpoint público
+	            // Endpoints públicos
+	            .requestMatchers(HttpMethod.GET, "/info/**").permitAll()
 	            .requestMatchers(HttpMethod.GET, "/cep/**").permitAll()
 
-	            // Todo o resto protegido
+	            // Endpoints protegidos
 	            .anyRequest().authenticated()
 	        )
 
