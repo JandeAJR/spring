@@ -5,5 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "project")
 public record ProjectInfo(
     String name,
-    String version
+    String version,
+    String database,
+    String environmentName
 ) {}

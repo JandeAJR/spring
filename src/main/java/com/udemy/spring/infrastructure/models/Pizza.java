@@ -41,7 +41,7 @@ public class Pizza implements Serializable {
     @Column(name = "name", length = 255)
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price", columnDefinition = "NUMBER(10,2)") // Definindo explicitamente o tipo da coluna no banco de dados
     private Double price;
 
     @JsonIgnore

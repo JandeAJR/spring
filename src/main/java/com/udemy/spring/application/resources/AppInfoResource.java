@@ -22,7 +22,9 @@ public class AppInfoResource {
     public Map<String, Object> info() {
     	return Map.of(
 		    "name", Objects.toString(projectInfo.name(), "unknown"),
-		    "version", Objects.toString(projectInfo.version(), "dev")
+		    "version", Objects.toString(projectInfo.version(), "dev"),
+		    "database", Objects.toString(projectInfo.database(), "not-configured"),
+		    "environmentName", Objects.toString(projectInfo.environmentName(), "local")
 		);
     }
 }

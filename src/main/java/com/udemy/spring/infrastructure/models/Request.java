@@ -44,7 +44,7 @@ public class Request implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
+    @Column(name = "date_request")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") //ISO 8601
     private LocalDateTime date;
 
@@ -53,13 +53,13 @@ public class Request implements Serializable {
     private Customer customer;                                                  // Para usar Lazy Loading, configurar spring.jpa.open-in-view=true
                                                                                //  Para usar Eager Loading, configurar spring.jpa.open-in-view=false
     
-    @ManyToMany
-    @JoinTable(name = "tb_item_request",
-            joinColumns = @JoinColumn(name = "request_id"),
-            inverseJoinColumns = @JoinColumn(name = "pizza_id"))
+    @ManyToMany // Relação muitos para muitos entre Request e Pizza
+    @JoinTable(name = "tb_item_request", // Tabela intermediária
+            joinColumns = @JoinColumn(name = "request_id"), // Chave estrangeira para Request
+            inverseJoinColumns = @JoinColumn(name = "pizza_id")) // Chave estrangeira para Pizza
     private List<Pizza> pizzas = new ArrayList<>();
 
-    @Column(name = "price")
+    @Column(name = "price", columnDefinition = "NUMBER(10,2)") // Definindo explicitamente o tipo da coluna no banco de dados
     private Double price;
 
     public Request() {}

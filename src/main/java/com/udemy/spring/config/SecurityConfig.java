@@ -51,6 +51,9 @@ public class SecurityConfig {
 	            // Endpoints públicos
 	            .requestMatchers(HttpMethod.GET, "/info/**").permitAll()
 	            .requestMatchers(HttpMethod.GET, "/cep/**").permitAll()
+	            .requestMatchers(HttpMethod.GET, "/customers/**").permitAll()
+	            .requestMatchers(HttpMethod.GET, "/pizzas/**").permitAll()
+	            .requestMatchers(HttpMethod.GET, "/requests/**").permitAll()
 
 	            // Endpoints protegidos
 	            .anyRequest().authenticated()

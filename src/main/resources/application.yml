@@ -1,11 +1,16 @@
 spring:
   application:
-    name: "@project.artifactId@"
+    name: "@project.name@"
+
   profiles:
-    active: test
+    active: homolog
+
   jpa:
     open-in-view: true
 
+  flyway:
+    enabled: false
+
 project:
-  name: "@project.artifactId@"
+  name: "@project.name@"
   version: "@project.version@"
