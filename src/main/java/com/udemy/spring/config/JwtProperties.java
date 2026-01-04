@@ -17,7 +17,7 @@ public class JwtProperties {
     private String key;
 	
 	@NotNull
-    private Duration expiration;
+    private Long expiration; // in minutes
 
     public String getKey() {
         return key;
@@ -27,11 +27,11 @@ public class JwtProperties {
         this.key = key;
     }
 
-    public Duration getExpiration() {
+    public Long getExpiration() {
         return expiration;
     }
 
-    public void setExpiration(Duration expiration) {
+    public void setExpiration(Long expiration) {
         this.expiration = expiration;
     }
 }

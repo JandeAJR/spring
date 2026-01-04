@@ -16,6 +16,25 @@ http://localhost:8080/api/spring/swagger-ui/index.html
 ✨ Use @Component quando a classe FAZ algo  
 ✨ Use @Configuration quando a classe DEFINE algo
 
+⚡ long (primitivo) — o atleta olímpico
+
+Use long quando:
+
+✔ Performance importa  
+✔ O valor sempre existe  
+✔ Não faz sentido ser null  
+✔ Você está lidando com lógica, cálculo, contadores, IDs internos  
+
+🧩 Long (wrapper) — o diplomata
+
+Use Long quando:  
+
+✔ O valor pode não existir (null faz sentido)  
+✔ Está em DTO, Entity JPA, Request/Response  
+✔ Trabalha com Collections  
+✔ Usa frameworks (Spring, Hibernate, Jackson…)  
+✔ Precisa representar estado desconhecido  
+
 
 🌱 @Component — o cidadão comum do Spring  
 

@@ -34,7 +34,7 @@ springdoc:
 
 jwt:
   key: dGVzdC1zZWNyZXQta2V5
-  expiration: 1h
+  expiration: 120
 
 viacep:
   url: https://viacep.com.br/ws
