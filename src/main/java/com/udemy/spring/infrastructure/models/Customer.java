@@ -88,10 +88,10 @@ public class Customer implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Customer)) return false;
+        Customer customer = (Customer) obj;
         return Objects.equals(id, customer.id);
     }
 

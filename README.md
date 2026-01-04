@@ -10,6 +10,9 @@ http://localhost:8080/api/spring/swagger-ui/index.html
 
 ## Dicas importantes do Barth!
 
+🌱 Boa prática visionária (o próximo passo natural)  
+✨ Nunca exponha Entity direto no controller  
+
 ✨ Use @Component quando a classe FAZ algo  
 ✨ Use @Configuration quando a classe DEFINE algo
 

@@ -1,0 +1,45 @@
+-- =================================================================
+-- Consultas para verificação dos dados inseridos nas tabelas
+-- =================================================================
+
+SELECT *
+FROM TB_CUSTOMER;
+
+SELECT *
+FROM TB_REQUEST;
+
+SELECT *
+FROM TB_ITEM_REQUEST;
+
+SELECT *
+FROM TB_PIZZA;
+
+SELECT
+   C.TELEPHONE,
+   C.CPF,
+   C.NAME,
+   R.ID AS REQUEST_ID,
+   P.NAME AS PIZZA,
+   P.PRICE
+FROM
+   TB_CUSTOMER C
+INNER JOIN
+   TB_REQUEST R ON (R.TELEPHONE  = C.TELEPHONE AND R.CPF = C.CPF)
+INNER JOIN
+   TB_ITEM_REQUEST RI ON (RI.REQUEST_ID = R.ID)
+INNER JOIN 
+   TB_PIZZA P ON (P.ID = RI.PIZZA_ID);
+   
+   
+SELECT * FROM TB_ITEM_REQUEST
+WHERE REQUEST_ID = 2;
+
+SELECT * FROM TB_REQUEST
+WHERE ID = 2;
+
+SELECT * FROM TB_PIZZA
+WHERE ID = 4;
+
+SELECT * FROM TB_CUSTOMER
+WHERE TELEPHONE = '61992170097' AND CPF = '66508690159';
+

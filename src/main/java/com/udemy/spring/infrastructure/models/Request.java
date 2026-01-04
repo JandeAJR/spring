@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +20,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 /*
@@ -41,17 +43,27 @@ public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Usando identity MySQL ou SQL Server
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_request") // Usando sequence para Oracle
+    @SequenceGenerator(
+        name = "seq_request",
+        sequenceName = "seq_request",
+        allocationSize = 1
+    )
     private Long id;
 
     @Column(name = "date_request")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") //ISO 8601
     private LocalDateTime date;
 
-    @ManyToOne(fetch = FetchType.LAZY)                                            // FetchType.LAZY  -> Lazy loading (default) -> Carregamento tardio 
-    @JoinColumns({@JoinColumn(name = "telephone"), @JoinColumn(name = "cpf")})   //  FetchType.EAGER -> Eager loading -> Carregamento imediato
-    private Customer customer;                                                  // Para usar Lazy Loading, configurar spring.jpa.open-in-view=true
-                                                                               //  Para usar Eager Loading, configurar spring.jpa.open-in-view=false
+    @JsonIgnore // Evita o loop infinito na serialização JSON
+    @ManyToOne(fetch = FetchType.LAZY)                                          // FetchType.LAZY  -> Lazy loading (default) -> Carregamento tardio 
+    @JoinColumns({                                                             //  FetchType.EAGER -> Eager loading -> Carregamento imediato
+    	@JoinColumn(name = "telephone", referencedColumnName = "TELEPHONE"),  // Para usar Lazy Loading, configurar spring.jpa.open-in-view=true
+    	@JoinColumn(name = "cpf", referencedColumnName = "cpf")              //  Para usar Eager Loading, configurar spring.jpa.open-in-view=false
+    })   
+    private Customer customer;                                                  
+                                                                               
     
     @ManyToMany // Relação muitos para muitos entre Request e Pizza
     @JoinTable(name = "tb_item_request", // Tabela intermediária
@@ -108,10 +120,10 @@ public class Request implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request request = (Request) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Request)) return false;
+        Request request = (Request) obj;
         return Objects.equals(id, request.id);
     }
 

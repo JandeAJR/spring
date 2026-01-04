@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 /*
@@ -35,7 +36,13 @@ public class Pizza implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Usando identity MySQL ou SQL Server
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pizza") // Usando sequence para Oracle
+    @SequenceGenerator(
+        name = "seq_pizza",
+        sequenceName = "seq_pizza",
+        allocationSize = 1
+    )
     private Long id;
 
     @Column(name = "name", length = 255)
@@ -84,10 +91,10 @@ public class Pizza implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pizza pizza = (Pizza) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Pizza)) return false;
+        Pizza pizza = (Pizza) obj;
         return Objects.equals(id, pizza.id);
     }
 
